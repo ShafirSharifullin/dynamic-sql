@@ -11,12 +11,12 @@ import java.time.LocalDateTime
 data class Company(
 
     @Id
-    val id: Long,
+    val id: Long = 0,
 
-    val name: String,
+    val name: String = "",
 
     @Column("date_create")
-    val dateCreate: LocalDateTime,
+    val dateCreate: LocalDateTime = LocalDateTime.now(),
 
     @MappedCollection(idColumn = "company_id", keyColumn = "id")
     val employees: List<Employee> = listOf(),

@@ -9,18 +9,18 @@ import org.springframework.data.relational.core.mapping.Table
 data class Employee(
 
     @Id
-    val id: Long,
+    val id: Long = 0,
 
-    val name: String,
+    val name: String = "",
 
-    val status: String,
+    val status: String = "",
 
-    val salary: Int,
+    val salary: Int = 0,
 
     @Column("year_birth")
-    val yearBirth: Int,
+    val yearBirth: Int = 0,
 
     @JsonIgnore
     @Column("company_id")
-    val companyId: Long,
+    val companyId: Long = 0,
 )

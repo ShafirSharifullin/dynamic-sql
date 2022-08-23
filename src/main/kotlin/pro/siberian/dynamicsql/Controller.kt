@@ -21,8 +21,12 @@ class Controller(
 ) {
 
     @GetMapping("/companies")
-    fun getCompanies(): List<Company> {
-        return companyServ.findAll()
+    fun getCompanies(
+        @RequestParam("has_full_time") hasFullTime: Boolean,
+        @RequestParam("sort", defaultValue = "date_create_new") @Pattern(regexp = "date_create_new|date_create_old")
+        sort: String,
+    ): Set<Company> {
+        return companyServ.findAll(hasFullTime, sort)
     }
 
     @GetMapping("/employees")
