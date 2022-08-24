@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 @Service
 class EmployeeService(private val employeeRepo: EmployeeRepository) {
 
-    fun findAll(hasFullTimeEmp: Boolean, hasFreelanceEmp: Boolean) = employeeRepo.queryMany { q ->
+    fun findAll(hasFullTimeEmp: Boolean, hasFreelanceEmp: Boolean): List<Employee> = employeeRepo.queryMany { q ->
         val query = q.select(employeeRepo.entityProjection())
             .from(QEmployee.employee)
 

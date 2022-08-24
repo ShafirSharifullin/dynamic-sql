@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service
 @Service
 class CompanyService(private val companyRepo: CompanyRepository) {
 
-    fun findAll(sort: String) = companyRepo.queryMany { q ->
+    fun findAll(sort: String): List<Company> = companyRepo.queryMany { q ->
         val query = q.select(companyRepo.entityProjection())
             .from(QCompany.company)
 
         if (sort == "date_create_new")
             query.orderBy(QCompany.company.dateCreate.desc())
-        else
+        else if (sort == "date_create_old")
             query.orderBy(QCompany.company.dateCreate.asc())
 
         query
