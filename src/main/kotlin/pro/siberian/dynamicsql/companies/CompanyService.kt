@@ -1,6 +1,7 @@
 package pro.siberian.dynamicsql.companies
 
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 class CompanyService(
@@ -8,7 +9,27 @@ class CompanyService(
     private val companyMapper: CompanyMapper,
 ) {
 
-    fun findAll(hasFullTime: Boolean, sort: String) = companyMapper.findAll(hasFullTime, sort).toSet()
+    fun findAll(
+        name: String?,
+        birthYears: List<Int>?,
+        hasFullTime: Boolean,
+        hasFreelance: Boolean,
+        dateFrom: LocalDateTime?,
+        dateTill: LocalDateTime?,
+        salaryFrom: Int?,
+        salaryTill: Int?,
+        sort: String,
+    ) = companyMapper.findAll(
+        if (name != null) "%$name%" else name,
+        birthYears,
+        hasFullTime,
+        hasFreelance,
+        dateFrom,
+        dateTill,
+        salaryFrom,
+        salaryTill,
+        sort
+    ).toSet()
 
     fun findAll() = companyRepo.findAll().toList()
 
