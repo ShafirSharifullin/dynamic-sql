@@ -1,5 +1,6 @@
 package pro.siberian.dynamicsql
 
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
@@ -22,10 +23,28 @@ class Controller(
 
     @GetMapping("/companies")
     fun getCompanies(
-        @RequestParam("sort", defaultValue = "date_create_new") @Pattern(regexp = "date_create_new|date_create_old")
-        sort: String,
-    ): List<Company> {
-        return companyServ.findAll(sort)
+        @RequestParam("name") name: String?,
+        @RequestParam("birth_years") birthYears: List<Int>?,
+        @RequestParam("has_full_time") hasFullTime: Boolean,
+        @RequestParam("has_freelance") hasFreelance: Boolean,
+        @RequestParam("date_from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) dateFrom: LocalDateTime?,
+        @RequestParam("date_till") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) dateTill: LocalDateTime?,
+        @RequestParam("salary_from") salaryFrom: Long?,
+        @RequestParam("salary_till") salaryTill: Long?,
+        @RequestParam("sort", defaultValue = "id_old")
+        @Pattern(regexp = "date_create_new|date_create_old|id_new|id_old") sort: String,
+    ): Set<Company> {
+        return companyServ.findAll(
+            name,
+            birthYears,
+            hasFullTime,
+            hasFreelance,
+            dateFrom,
+            dateTill,
+            salaryFrom,
+            salaryTill,
+            sort
+        )
     }
 
     @GetMapping("/employees")

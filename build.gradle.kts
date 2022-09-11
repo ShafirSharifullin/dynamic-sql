@@ -23,8 +23,8 @@ dependencies {
 
     // QueryDsl
     implementation("com.querydsl:querydsl-sql-spring")
-    implementation("com.infobip:infobip-spring-data-jdbc-querydsl-boot-starter:7.1.0")
-    kapt("com.infobip:infobip-spring-data-jdbc-querydsl-boot-starter:7.1.0")
+    implementation("com.infobip:infobip-spring-data-jdbc-querydsl-boot-starter:7.2.0")
+    kapt("com.infobip:infobip-spring-data-jdbc-querydsl-boot-starter:7.2.0")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.flywaydb:flyway-core")
